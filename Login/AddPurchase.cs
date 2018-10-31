@@ -40,42 +40,6 @@ namespace Login
             this.ControlBox = false;
         }
 
-        public string PItemName
-        {
-            get { return txtItemName.Text; }
-            set { txtItemName.Text = value; }
-        }
-
-        public string PPrice
-        {
-            get { return txtPrice.Text; }
-            set { txtPrice.Text = value; }
-        }
-
-        public string PStock
-        {
-            get { return txtStock.Text; }
-            set { txtStock.Text = value; }
-        }
-
-        public string PItemType
-        {
-            get { return itemType; }
-            set { itemType = value; }
-        }
-
-        public Book PBook
-        {
-            get { return book; }
-            set { book = value; }
-        }
-
-        public Journal PJournal
-        {
-            get { return journal; }
-            set { journal = value; }
-        }
-
         private void btnSell_Click(object sender, EventArgs e)
         {
             try
@@ -125,6 +89,43 @@ namespace Login
             txtPrice.Text = "";
             txtCustomerName.Text = "";
             txtStock.Text = "";
+        }
+
+        // properties of the textboxes to get the values from store window
+        public string PItemName
+        {
+            get { return txtItemName.Text; }
+            set { txtItemName.Text = value; }
+        }
+
+        public string PPrice
+        {
+            get { return txtPrice.Text; }
+            set { txtPrice.Text = value; }
+        }
+
+        public string PStock
+        {
+            get { return txtStock.Text; }
+            set { txtStock.Text = value; }
+        }
+
+        public string PItemType
+        {
+            get { return itemType; }
+            set { itemType = value; }
+        }
+
+        public Book PBook
+        {
+            get { return book; }
+            set { book = value; }
+        }
+
+        public Journal PJournal
+        {
+            get { return journal; }
+            set { journal = value; }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

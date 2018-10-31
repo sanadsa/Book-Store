@@ -14,7 +14,6 @@ namespace Login
     public partial class Login : Form
     {        
         BookStore bs = BookStore.GetInstance();
-        //private Store store = new Store();
 
         // only one instance of the login form
         private static Login _login;

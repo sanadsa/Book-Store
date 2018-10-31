@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLib", "BookLib\BookLib.csproj", "{A236E033-86F6-4BCD-BE42-29F0199D7514}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelBookLib", "BookLib\ModelBookLib.csproj", "{A236E033-86F6-4BCD-BE42-29F0199D7514}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewController", "Login\ViewController.csproj", "{F213186E-24A3-4DBA-8CCA-EFDB1DD90AD3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{0FE82F8C-8880-4E4D-A194-B48385B5A174}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Log", "Log\Log.csproj", "{5B4683B6-36E1-4E31-A7A3-E371A0EF4137}"
 EndProject
@@ -25,10 +23,6 @@ Global
 		{F213186E-24A3-4DBA-8CCA-EFDB1DD90AD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F213186E-24A3-4DBA-8CCA-EFDB1DD90AD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F213186E-24A3-4DBA-8CCA-EFDB1DD90AD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0FE82F8C-8880-4E4D-A194-B48385B5A174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0FE82F8C-8880-4E4D-A194-B48385B5A174}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0FE82F8C-8880-4E4D-A194-B48385B5A174}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0FE82F8C-8880-4E4D-A194-B48385B5A174}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B4683B6-36E1-4E31-A7A3-E371A0EF4137}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B4683B6-36E1-4E31-A7A3-E371A0EF4137}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B4683B6-36E1-4E31-A7A3-E371A0EF4137}.Release|Any CPU.ActiveCfg = Release|Any CPU

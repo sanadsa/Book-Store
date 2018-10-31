@@ -124,9 +124,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BookLib\BookLib.csproj">
+    <ProjectReference Include="..\BookLib\ModelBookLib.csproj">
       <Project>{a236e033-86f6-4bcd-be42-29f0199d7514}</Project>
-      <Name>BookLib</Name>
+      <Name>ModelBookLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

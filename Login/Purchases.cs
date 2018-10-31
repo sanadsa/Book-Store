@@ -35,6 +35,7 @@ namespace Login
             this.ControlBox = false;
         }
 
+        // get purchases table from db
         public void Display()
         {
             dGVPurchases.DataSource = bs.GetItemsTable("Purchases");

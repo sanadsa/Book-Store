@@ -41,6 +41,7 @@ namespace Login
             this.ControlBox = false;
         }
 
+        // update item in the db and show it in the ui table
         private void btnUpdate_Click(object sender, EventArgs e)
         {
             try
@@ -80,6 +81,7 @@ namespace Login
             bs.UpdateJournal(item, store.Id);
         }
 
+        // add item from ui textboxes to the db and show the new table in the ui
         private void btnAdd_Click_1(object sender, EventArgs e)
         {
             try
@@ -124,6 +126,7 @@ namespace Login
             }
         }
 
+        // for add and update operations - show the updated table from db in the ui
         private void ItemChanged()
         {
             MessageBox.Show("You have successfully changed " + txtItemName.Text);
@@ -135,6 +138,7 @@ namespace Login
             store.Show();
         }        
 
+        // connect with the model to add items
         private void AddBook()
         {
             Enum.TryParse(comboCategory.Text, out eCategory category);
@@ -179,6 +183,7 @@ namespace Login
             grpbJournal.Enabled = true;
         }        
 
+        // properties of the textboxes to get the values from store window
         public string PItemName
         {
             get { return txtItemName.Text; }

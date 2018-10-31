@@ -39,6 +39,7 @@ namespace Login
             this.ControlBox = false;
         }
 
+        // open add item window
         private void btnAdd_Click(object sender, EventArgs e)
         {
             addItem.ClearFields();
@@ -46,35 +47,8 @@ namespace Login
             addItem.PUpdateButton.Visible = false;
             addItem.PAddButton.Visible = true;
         }
-
-        //private void AddItemType(int itemId)
-        //{
-        //    if (rbtnBook.Checked)
-        //    {
-        //        if (txtEdition.Text == "")
-        //        {
-        //            MessageBox.Show("Fill all fields");
-        //        }
-        //        else
-        //        {
-        //            Book book = new Book((int.Parse(txtEdition.Text)));
-        //            bs.AddBook(book, itemId);
-        //        }
-        //    }
-        //    else if (rbtnJournal.Checked)
-        //    {
-        //        if (txtVolume.Text == "")
-        //        {
-        //            MessageBox.Show("Fill all fields");
-        //        }
-        //        else
-        //        {
-        //            Journal journal = new Journal(txtVolume.Text);
-        //            bs.AddJournal(journal, itemId);
-        //        }
-        //    }
-        //}       
-
+  
+        // fill item tables from the db to the ui
         public void Display()
         {
             dGVBooks.DataSource = bs.GetItemsTable("Book");
@@ -93,6 +67,7 @@ namespace Login
             login.Show();                      
         }
 
+        // when clicking on row in the table send the values to the add item textboxes
         private void dGVBooks_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             FillItemValues(dGVBooks, e);
@@ -111,6 +86,7 @@ namespace Login
 
         private void FillItemValues(DataGridView dgv, DataGridViewCellEventArgs e)
         {
+            // fill add item textbox
             ID = int.Parse(dgv.Rows[e.RowIndex].Cells[0].Value.ToString());
             addItem.PIsbn = dgv.Rows[e.RowIndex].Cells[1].Value.ToString();
             addItem.PItemName = dgv.Rows[e.RowIndex].Cells[2].Value.ToString();
@@ -121,6 +97,7 @@ namespace Login
             addItem.PCategory = dgv.Rows[e.RowIndex].Cells[7].Value.ToString();
             addItem.PStock = dgv.Rows[e.RowIndex].Cells[8].Value.ToString();
 
+            // fill purchase textbox
             addPurchase.PItemName = dgv.Rows[e.RowIndex].Cells[2].Value.ToString();
             addPurchase.PPrice = dgv.Rows[e.RowIndex].Cells[4].Value.ToString();
             addPurchase.PStock = dgv.Rows[e.RowIndex].Cells[8].Value.ToString();
@@ -193,6 +170,7 @@ namespace Login
             set { btnPurchase = value; }
         }
 
+        // get table from db with the value in the search textbox
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
             dGVBooks.DataSource = bs.SearchItem("Book", txtSearchByName.Text, "itemName");
