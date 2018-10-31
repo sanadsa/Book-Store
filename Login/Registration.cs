@@ -18,6 +18,7 @@ namespace Login
         public Registration()
         {
             InitializeComponent();
+            this.ControlBox = false;
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -55,6 +56,13 @@ namespace Login
                     MessageBox.Show(ex.Message);
                 }
             }
-        }    
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Login login = Login.LoginInstance;
+            login.Show();
+        }
     }
 }

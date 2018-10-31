@@ -34,6 +34,7 @@
             this.lblBook = new System.Windows.Forms.Label();
             this.dGVBooks = new System.Windows.Forms.DataGridView();
             this.grpbOperations = new System.Windows.Forms.GroupBox();
+            this.btnPurchase = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnSell = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -44,7 +45,10 @@
             this.RightToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.LeftToolStripPanel = new System.Windows.Forms.ToolStripPanel();
             this.ContentPanel = new System.Windows.Forms.ToolStripContentPanel();
-            this.btnPurchase = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtSearchByName = new System.Windows.Forms.TextBox();
+            this.txtSearchByIsbn = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.grpbItems.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dGVJournals)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dGVBooks)).BeginInit();
@@ -58,7 +62,7 @@
             this.grpbItems.Controls.Add(this.dGVJournals);
             this.grpbItems.Controls.Add(this.lblBook);
             this.grpbItems.Controls.Add(this.dGVBooks);
-            this.grpbItems.Location = new System.Drawing.Point(13, 29);
+            this.grpbItems.Location = new System.Drawing.Point(12, 105);
             this.grpbItems.Name = "grpbItems";
             this.grpbItems.Size = new System.Drawing.Size(581, 508);
             this.grpbItems.TabIndex = 0;
@@ -77,7 +81,7 @@
             // dGVJournals
             // 
             this.dGVJournals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dGVJournals.Location = new System.Drawing.Point(6, 276);
+            this.dGVJournals.Location = new System.Drawing.Point(6, 277);
             this.dGVJournals.Name = "dGVJournals";
             this.dGVJournals.Size = new System.Drawing.Size(569, 212);
             this.dGVJournals.TabIndex = 11;
@@ -113,6 +117,16 @@
             this.grpbOperations.TabIndex = 1;
             this.grpbOperations.TabStop = false;
             this.grpbOperations.Text = "Operations";
+            // 
+            // btnPurchase
+            // 
+            this.btnPurchase.Location = new System.Drawing.Point(6, 176);
+            this.btnPurchase.Name = "btnPurchase";
+            this.btnPurchase.Size = new System.Drawing.Size(152, 37);
+            this.btnPurchase.TabIndex = 3;
+            this.btnPurchase.Text = "Purhcase History";
+            this.btnPurchase.UseVisualStyleBackColor = true;
+            this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
             // 
             // btnUpdate
             // 
@@ -150,7 +164,7 @@
             this.exitToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(776, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(784, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -198,22 +212,50 @@
             // 
             this.ContentPanel.Size = new System.Drawing.Size(150, 150);
             // 
-            // btnPurchase
+            // label1
             // 
-            this.btnPurchase.Location = new System.Drawing.Point(6, 176);
-            this.btnPurchase.Name = "btnPurchase";
-            this.btnPurchase.Size = new System.Drawing.Size(152, 37);
-            this.btnPurchase.TabIndex = 3;
-            this.btnPurchase.Text = "Purhcase History";
-            this.btnPurchase.UseVisualStyleBackColor = true;
-            this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Search item by name:";
+            // 
+            // txtSearchByName
+            // 
+            this.txtSearchByName.Location = new System.Drawing.Point(128, 35);
+            this.txtSearchByName.Name = "txtSearchByName";
+            this.txtSearchByName.Size = new System.Drawing.Size(224, 20);
+            this.txtSearchByName.TabIndex = 4;
+            this.txtSearchByName.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // txtSearchByIsbn
+            // 
+            this.txtSearchByIsbn.Location = new System.Drawing.Point(128, 64);
+            this.txtSearchByIsbn.Name = "txtSearchByIsbn";
+            this.txtSearchByIsbn.Size = new System.Drawing.Size(224, 20);
+            this.txtSearchByIsbn.TabIndex = 6;
+            this.txtSearchByIsbn.TextChanged += new System.EventHandler(this.txtSearchByIsbn_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(13, 67);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(102, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Search item by isbn:";
             // 
             // Store
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(776, 549);
+            this.ClientSize = new System.Drawing.Size(784, 614);
+            this.Controls.Add(this.txtSearchByIsbn);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtSearchByName);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.grpbOperations);
             this.Controls.Add(this.grpbItems);
             this.Controls.Add(this.menuStrip1);
@@ -254,5 +296,9 @@
         private System.Windows.Forms.ToolStripPanel LeftToolStripPanel;
         private System.Windows.Forms.ToolStripContentPanel ContentPanel;
         private System.Windows.Forms.Button btnPurchase;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtSearchByName;
+        private System.Windows.Forms.TextBox txtSearchByIsbn;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -37,7 +37,7 @@ namespace Login
 
         public void Display()
         {
-            dGVPurchases.DataSource = bs.GetItemsTable("Purchase");
+            dGVPurchases.DataSource = bs.GetItemsTable("Purchases");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

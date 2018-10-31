@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace BookLib
 {
@@ -11,11 +12,6 @@ namespace BookLib
     /// </summary>
     interface IAbstractItem
     {
-        /**
-         * returns the id of the added item so it can be used to add a derived type of item with same id
-         * */
-        int AddItem(AbstractItem item);
-
         /// <summary>
         /// adds new book to the db
         /// </summary>
@@ -57,5 +53,29 @@ namespace BookLib
         /// <param name="newJournal"></param>
         /// <param name="id"></param>
         void UpdateJournal(Journal newJournal, int id);
+
+        /// <summary>
+        /// gets all the items from a specific table in the DB
+        /// </summary>
+        /// <param name="type">name of the table to gets its items from the DB</param>
+        /// <returns>data table of the table that we choose</returns>
+        DataTable GetItemsTable(string type);
+
+        /// <summary>
+        /// search for item from the table by and string column
+        /// </summary>
+        /// <param name="tableName">the table to search in</param>
+        /// <param name="value">which value to look for</param>
+        /// <param name="searchBy">search by column table</param>
+        /// <returns>datatable with the rows that contain only searched value</returns>
+        DataTable SearchItem(string table, string value, string searchBy);
+
+        /// <summary>
+        /// search for item from the table by isbn
+        /// </summary>
+        /// <param name="tableName">the table to search in</param>
+        /// <param name="value">which isbn to look for</param>
+        /// <returns>datatable with the rows that contain only searched value</returns>
+        DataTable SearchItemByIsbn(string tableName, int value);
     }
 }

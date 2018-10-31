@@ -16,7 +16,15 @@ namespace Log
         FileInfo logFileInfo;
         private string logFilePath = "C:\\Logs\\";
                 
+        /// <summary>
+        /// Default ctor
+        /// </summary>
         public LogWriter() { }
+
+        /// <summary>
+        /// A method to write to the log file
+        /// </summary>
+        /// <param name="logMessage">the message that will be written in the log</param>
         public void LogWrite(string logMessage)
         {
             try

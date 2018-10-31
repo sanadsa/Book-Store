@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookLib", "BookLib\BookLib.csproj", "{A236E033-86F6-4BCD-BE42-29F0199D7514}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "Login\UI.csproj", "{F213186E-24A3-4DBA-8CCA-EFDB1DD90AD3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewController", "Login\ViewController.csproj", "{F213186E-24A3-4DBA-8CCA-EFDB1DD90AD3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{0FE82F8C-8880-4E4D-A194-B48385B5A174}"
 EndProject

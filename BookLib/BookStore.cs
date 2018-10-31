@@ -14,10 +14,11 @@ namespace BookLib
     /// </summary>
     public class BookStore : IUser, IAbstractItem, IPurchase
     {
-        string path = @"Data Source=DESKTOP-7Q5OG91\SQLEXPRESS01;Initial Catalog=bookStore;Integrated Security=True";
+        string path = @"Data Source=DESKTOP-7Q5OG91\SQLEXPRESS01;Initial Catalog=bookStore;Integrated Security=True;MultipleActiveResultSets=true;";
         SqlConnection con;
         SqlCommand cmd;
-        SqlDataAdapter adpt;       
+        SqlDataAdapter adpt;
+        SqlDataReader rs;
         private static BookStore singletone;
         private LogWriter log = new LogWriter();
 
@@ -98,34 +99,7 @@ namespace BookLib
             {
                 if (con != null) { con.Close(); }
             }
-        }
-
-        // not using for now
-        public User GetUser(string email)
-        {
-            User user = null;
-            try
-            {
-                con.Open();
-                cmd = new SqlCommand("SELECT * from UserTable WHERE email = '"+email+"';", con);
-                cmd.ExecuteNonQuery();
-                SqlDataReader rdr = cmd.ExecuteReader();
-                rdr.Read();
-                Console.WriteLine("in get user: " + rdr[3].ToString());
-                user = new User(rdr[1].ToString(), rdr[2].ToString(), rdr[3].ToString(), eUserType.admin);
-            }
-            catch (Exception ex)
-            {
-                //show message in log                
-                throw new Exception("get user error " + ex.Message);
-            }
-            finally
-            {
-                if (con != null) { con.Close(); }
-            }
-
-            return user;
-        }
+        }        
 
         /// <summary>
         /// gets the user type to know the permissions of the user (admin user can use all function of the app)
@@ -200,36 +174,7 @@ namespace BookLib
             }
             return isUserExists;
         }   
-
-        // not using for now
-        public int AddItem(AbstractItem item)
-        {
-            try
-            {                
-                con.Open();
-                if (item != null)
-                {
-                    cmd = new SqlCommand("insert into Item (isbn, itemName, publishDate, price, copyNumber, topic, category, stock) " +
-                                     "values ('" + item.Isbn + "', '" + item.Name + "', '" + item.Date + "', '" + item.Price + "', '" + item.CopyNumber + "', '" + item.Topic + "', '" + item.Category + "', '" + item.Stock + "') ", con);
-
-                    cmd.ExecuteNonQuery();                    
-                    cmd = new SqlCommand("select top 1 itemId from Item where isbn='" + item.Isbn + "' order by itemId desc", con);
-                }
-                SqlDataReader rs = cmd.ExecuteReader();                
-                rs.Read();
-                return (int) rs[0];
-            }
-            catch (Exception ex)
-            {
-                //show message in log
-                   throw new Exception("add item error " + ex.Message);
-            }
-            finally
-            {
-                if (con != null) { con.Close(); }
-            }
-        }
-
+      
         /// <summary>
         /// adds new book to the Book table in the database
         /// </summary>
@@ -339,53 +284,7 @@ namespace BookLib
                 log.LogWrite("Get number of rows by isbn error in table " + itemType);
                 throw new Exception("Get number of rows by isbn error in table " + itemType);
             }
-        }
-
-        //public void AddBook(Book book, int itemId)
-        //{
-        //    try
-        //    {
-        //        con.Open();                
-        //        if (book != null)
-        //        {
-        //            cmd = new SqlCommand("insert into Book (itemId, edition) " +
-        //                             "values ('" + itemId + "', '" + book.Edition + "') ", con);
-        //        }
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //show message in log
-        //        throw new Exception("add book error " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        if (con != null) { con.Close(); }
-        //    }
-        //}
-
-        //public void AddJournal(Journal journal, int itemId)
-        //{
-        //    try
-        //    {
-        //        con.Open();
-        //        if (journal != null)
-        //        {
-        //            cmd = new SqlCommand("insert into Journal (itemId, volume) " +
-        //                             "values ('" + itemId + "', '" + journal.Volume + "') ", con);
-        //        }
-        //        cmd.ExecuteNonQuery();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //show message in log
-        //        throw new Exception("add journal error " + ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        if (con != null) { con.Close(); }
-        //    }
-        //}     
+        }     
 
         /// <summary>
         /// reduces stock by newStock from the book that have the id bookId
@@ -449,34 +348,7 @@ namespace BookLib
             {
                 if (con != null) { con.Close(); }
             }
-        }
-
-        // not using getItemId for now
-        public string GetItemId(int isbn)
-        {
-            try
-            {
-                
-                con.Open();
-                string itemId = "";
-                cmd = new SqlCommand("select itemId from Item where isbn='"+isbn+"' ", con);
-                SqlDataReader rs = cmd.ExecuteReader();
-                while(rs.Read())
-                {
-                    itemId = rs[0].ToString();
-                }
-                return itemId;
-            }
-            catch (Exception ex)
-            {
-                //show message in log                
-                throw new Exception("sell item error " + ex.Message);
-            }
-            finally
-            {
-                if (con != null) { con.Close(); }
-            }
-        }
+        }       
 
         /// <summary>
         /// gets all the items from a specific table in the DB
@@ -566,9 +438,71 @@ namespace BookLib
         }
 
         /// <summary>
-        /// adds new purchase to the Purchase table in the database
+        /// search for item from the table by and string column
         /// </summary>
-        /// <param name="purchase"></param>
+        /// <param name="tableName">the table to search in</param>
+        /// <param name="value">which value to look for</param>
+        /// <param name="searchBy">search by column table</param>
+        /// <returns>datatable with the rows that contain only searched value</returns>
+        public DataTable SearchItem(string tableName, string value, string searchBy)
+        {
+            try
+            {
+                con.Open();
+                adpt = new SqlDataAdapter("select * from " + tableName + " where " + searchBy + " like '%" + value + "%' ", con);
+                DataTable dt = new DataTable();
+                adpt.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.LogWrite("Search item error: " + ex.Message);
+                throw new Exception("Search item error: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null) { con.Close(); }
+            }
+        }
+
+        /// <summary>
+        /// search for item from the table by isbn
+        /// </summary>
+        /// <param name="tableName">the table to search in</param>
+        /// <param name="value">which isbn to look for</param>
+        /// <returns>datatable with the rows that contain only the searched ones</returns>
+        public DataTable SearchItemByIsbn(string tableName, int value)
+        {
+            try
+            {
+                con.Open();
+                if (value == 0)
+                {
+                    adpt = new SqlDataAdapter("select * from " + tableName, con);
+                }
+                else
+                {
+                    adpt = new SqlDataAdapter("select * from " + tableName + " where isbn like '%" + value + "%' ", con);
+                }                
+                DataTable dt = new DataTable();
+                adpt.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                log.LogWrite("Search item by isbn error: " + ex.Message);
+                throw new Exception("Search item by isbn error: " + ex.Message);
+            }
+            finally
+            {
+                if (con != null) { con.Close(); }
+            }
+        }
+
+        /// <summary>
+        /// adds new customer and new purchase to the DB
+        /// </summary>
+        /// <param name="purchase">contains customer name and id fields</param>
         public void AddPurchase(Purchase purchase)
         {
             try
@@ -576,10 +510,17 @@ namespace BookLib
                 con.Open();
                 if (purchase != null)
                 {
-                    cmd = new SqlCommand("insert into Purchase (customerName, itemName, itemPrice, quantity, purchaseDate) " +
-                                     "values ('" + purchase.CustomerName + "', '" + purchase.ItemName + "', '" + purchase.ItemPrice + "', '" + purchase.Quantity + "', '" + purchase.PurchaseDate + "') ", con);
+                    cmd = new SqlCommand("insert into Customers (customerName) " +
+                                     "values ('" + purchase.CustomerName + "') ", con);
+                    cmd.ExecuteNonQuery();
+                    cmd = new SqlCommand("select top 1 ID from Customers where customerName='" + purchase.CustomerName + "' order by ID desc", con);
+                    rs = cmd.ExecuteReader();
+                    rs.Read();
+                    int customerID = (int)rs[0];
+                    cmd = new SqlCommand("insert into Purchases (customerId, customerName, itemName, itemPrice, quantity, purchaseDate) " +
+                                     "values ("+customerID+", '" + purchase.CustomerName + "', '" + purchase.ItemName + "', '" + purchase.ItemPrice + "', '" + purchase.Quantity + "', '" + purchase.PurchaseDate + "') ", con);
+                    cmd.ExecuteNonQuery();
                 }
-                cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {
@@ -588,8 +529,11 @@ namespace BookLib
             }
             finally
             {
-                if (con != null) { con.Close(); }
+                if (con != null) {
+                    rs.Close();
+                    con.Close();
+                }
             }
-        }        
+        }
     }
 }

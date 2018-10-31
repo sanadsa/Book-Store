@@ -74,7 +74,10 @@ update Book set stock=3 where bookId=2
 delete from Purchase where purchaseId=3
 select userType from UserTable where email='ss'
 
-insert into UserTable values('sas', 'a', '1', 'admin')
+select * from userTable
+if exists (select * from UserTable d where d.email = 'rr')
+if not exists (select * from UserTable d where d.email = 'rr') select * from UserTable
+insert into UserTable values('sas', 'rr', '1', 'employee')
 
 insert into Book values(123, 'b5', '2010-10-01', 5.5, 6, 'fdfd', 'books', 8, 4)
 

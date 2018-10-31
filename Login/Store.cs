@@ -192,5 +192,32 @@ namespace Login
             get { return btnPurchase; }
             set { btnPurchase = value; }
         }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            dGVBooks.DataSource = bs.SearchItem("Book", txtSearchByName.Text, "itemName");
+            dGVJournals.DataSource = bs.SearchItem("Journal", txtSearchByName.Text, "itemName");
+        }
+
+        private void txtSearchByIsbn_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (txtSearchByIsbn.Text == "")
+                {
+                    dGVBooks.DataSource = bs.SearchItemByIsbn("Book", 0);
+                    dGVJournals.DataSource = bs.SearchItemByIsbn("Journal", 0);
+                }
+                else
+                {
+                    dGVBooks.DataSource = bs.SearchItemByIsbn("Book", Convert.ToInt32(txtSearchByIsbn.Text));
+                    dGVJournals.DataSource = bs.SearchItemByIsbn("Journal", Convert.ToInt32(txtSearchByIsbn.Text));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

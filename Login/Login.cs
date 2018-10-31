@@ -41,7 +41,7 @@ namespace Login
             {
                 if (txtEmail.Text == "" || txtPassword.Text == "")
                 {
-                    MessageBox.Show("Fill coordinations");
+                    MessageBox.Show("Fill all fields");
                 }
                 else
                 {
